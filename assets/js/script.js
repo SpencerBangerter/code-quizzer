@@ -1,4 +1,6 @@
-// set Element Variables
+///////////////////////
+// Element Variables //
+///////////////////////
 
 // let startButtonEl = $("#start-btn");
 let startButtonEl = document.getElementById('start-btn')
@@ -12,14 +14,20 @@ let aGridEl = document.getElementById('answer-buttons')
 // startButtonEl.click(startQuiz);
 startButtonEl.addEventListener('click', startQuiz);
 
-// Question index to increment current question
+// Question index to increment current question when needed
 let questionIndex = 0
+// sets question from question array based upon the index above
 let currentQ = questionsArr[questionIndex]
-// Functions
+
+///////////////
+// Functions //
+///////////////
+
 function startQuiz() {
     console.log('Start Quiz');
     startButtonEl.classList.add('hide');
     qContainerEl.classList.remove('hide');
+    //calls display func with the current Question set above
     dispQuestion(currentQ)
 }
 

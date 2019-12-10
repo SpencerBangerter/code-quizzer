@@ -10,7 +10,8 @@ let aGridEl = $('#answer-buttons');
 let nextBtnEl = $('#next-btn');
 let answerBtnEl = $('#answer-buttons');
 let submitBtnEl = $('#submit-btn');
-let userEl = $('#user-form');
+let formEl = $('#user-form');
+let userEl = $('#user');
 let controlsEl = $('#controls');
 // Base Variables
 // Question index to increment current question when needed
@@ -80,7 +81,7 @@ function nextQuestion () {
 
         //Empty container, show correct buttons/name input
         qContainerEl.empty()
-        userEl.removeClass('hide');
+        formEl.removeClass('hide');
         submitBtnEl.removeClass('hide');
         nextBtnEl.addClass('hide');
         controlsEl.addClass('grid');
@@ -94,6 +95,11 @@ function nextQuestion () {
 };
 
 function submitScore () {
-    console.log("score Submit")
+    if (!user.value) {
+        formEl.fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+    } else {
+        
+    }
+
 };
 

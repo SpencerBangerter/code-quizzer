@@ -11,6 +11,7 @@ let nextBtnEl = $('#next-btn');
 let answerBtnEl = $('#answer-buttons');
 let submitBtnEl = $('#submit-btn');
 let userEl = $('#user-form');
+let controlsEl = $('#controls');
 // Base Variables
 // Question index to increment current question when needed
 let questionIndex = 0;
@@ -82,11 +83,13 @@ function nextQuestion () {
         userEl.removeClass('hide');
         submitBtnEl.removeClass('hide');
         nextBtnEl.addClass('hide');
+        controlsEl.addClass('grid');
 
     
 
     } else {
         dispQuestion(currentQ);
+        nextBtnEl.addClass('hide');
     }
 };
 

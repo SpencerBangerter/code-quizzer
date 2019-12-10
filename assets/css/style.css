@@ -71,7 +71,6 @@ body{
     padding: 10px 20px;
     font-size: 1.5rem;
     font-weight: bolder;
-    margin-left: 10px;
 }
 .input-group-text, .form-control {
     border: 1px solid black;
@@ -98,4 +97,8 @@ body{
 }
 .hide{
     display: none;
+}
+.grid{
+    display: grid;
+    gap: 10px;
 }

@@ -13,6 +13,7 @@ let submitBtnEl = $('#submit-btn');
 let formEl = $('#user-form');
 let userEl = $('#user');
 let controlsEl = $('#controls');
+
 // Base Variables
 // Question index to increment current question when needed
 let questionIndex = 0;
@@ -23,6 +24,7 @@ let userJSON = {
     name: '',
     score: '',
 }
+
 /////////////////////
 // Click Listeners //
 /////////////////////
@@ -39,7 +41,9 @@ submitBtnEl.click(submitScore);
 
 function startQuiz() {
     //hide start button, and show the question container
-    // startButtonEl.classList.add('hide');
+    //set qIndex to zero for a restart option
+    questionIndex = 0;
+    currentQ = questionsArr[questionIndex];
     startButtonEl.addClass('hide');
     qContainerEl.removeClass('hide');
     //calls display func with the current Question set above
@@ -83,7 +87,7 @@ function nextQuestion () {
         //Stop Score countdown
 
         //Empty container, show correct buttons/name input
-        qContainerEl.empty()
+        qContainerEl.addClass('hide')
         formEl.removeClass('hide');
         submitBtnEl.removeClass('hide');
         nextBtnEl.addClass('hide');
@@ -104,8 +108,10 @@ function submitScore () {
         userJSON.name = user.value
         userJSON.score = score
         localStorage.setItem("user", JSON.stringify(userJSON))
-        console.log(userJSON)
-
+        formEl.addClass('hide');
+        submitBtnEl.addClass('hide');
+        startButtonEl.removeClass('hide');
+        startButtonEl.text('Restart');
     }
 
 };

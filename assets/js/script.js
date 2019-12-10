@@ -13,7 +13,8 @@ let submitBtnEl = $('#submit-btn');
 let formEl = $('#user-form');
 let userEl = $('#user');
 let controlsEl = $('#controls');
-
+let scoreBtnEl = $('#score-btn');
+let scoreEl = $('#score-container')
 // Base Variables
 // Question index to increment current question when needed
 let questionIndex = 0;
@@ -34,6 +35,7 @@ startButtonEl.click(startQuiz);
 answerBtnEl.click(selectAnswer);
 nextBtnEl.click(nextQuestion);
 submitBtnEl.click(submitScore);
+scoreBtnEl.click(viewScores);
 
 ///////////////
 // Functions //
@@ -45,7 +47,9 @@ function startQuiz() {
     questionIndex = 0;
     currentQ = questionsArr[questionIndex];
     startButtonEl.addClass('hide');
+    scoreBtnEl.addClass('hide');
     qContainerEl.removeClass('hide');
+    scoreEl.addClass('hide');
     //calls display func with the current Question set above
     dispQuestion(currentQ);
     score = 300
@@ -115,7 +119,14 @@ function submitScore () {
         startButtonEl.removeClass('hide');
         startButtonEl.text('Restart');
         //NEED TO CREATE USER SCORE DISPLAY
+        scoreEl.removeClass('hide');
     }
 
 };
 
+function viewScores () {
+    startButtonEl.removeClass('hide');
+    startButtonEl.text('Start Quiz')
+    scoreBtnEl.addClass('hide');
+    scoreEl.removeClass('hide');
+}

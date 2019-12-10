@@ -62,10 +62,11 @@ body{
     background: red;
     background-blend-mode: color-burn;
 }
-.start-button, .next-button {
+.start-button, .next-button, .score-button {
     padding: 10px 20px;
     font-size: 1.5rem;
     font-weight: bolder;
+    margin: 5px;
 }
 .submit-button {
     padding: 10px 20px;

@@ -14,7 +14,7 @@
       </nav>      
     
     <div class="container">
-  
+      <!-- display questions when prompted -->
       <div id="question-container" class="hide">
         <div id="question">Question</div>
         <div id="answer-buttons" class="button-grid">
@@ -24,11 +24,17 @@
           <button class="btn">Answer 4</button>
         </div>
       </div>
+
+      <div id="score-container" class='hide'>
+        <div id='user-display'>User</div>
+        <div id='user-score'>Score</div>
+      </div>
+      
+      <!-- Buttons to control main display -->
       <div id="controls" class="controls">
         <button id="start-btn" class="start-button btn">Start Quiz</button>
         <button id="next-btn" class="next-button btn hide">Next Question</button>
-
-        <!-- <input id ="user-form" type="text" class="form-control hide" placeholder="Initials" aria-label="Initials"> -->
+        <button id="score-btn" class="score-button btn">View Scores</button>
         <div id ="user-form" class="input-group input-group-lg hide">
           <div class="input-group-prepend">
             <span class="input-group-text font-weight-bold" id="inputGroup-sizing-lg">Name</span>

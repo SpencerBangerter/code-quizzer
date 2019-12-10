@@ -19,7 +19,7 @@ let controlsEl = $('#controls');
 let questionIndex = 0;
 // sets question from question array based upon the index above
 let currentQ = questionsArr[questionIndex];
-let score = 300;
+let score = 0;
 let userJSON = {
     name: '',
     score: '',
@@ -48,6 +48,7 @@ function startQuiz() {
     qContainerEl.removeClass('hide');
     //calls display func with the current Question set above
     dispQuestion(currentQ);
+    score = 300
 };
 
 //Display the question of current index, and make buttons for each answer option. 
@@ -67,12 +68,11 @@ function dispQuestion(question) {
     })
 };
 
-//Bug when clicking inbetween buttons TO FIX
 function selectAnswer(e) {
      if ($(e.target).text() === currentQ.answer) {
          $(e.target).addClass('btn-success');
          nextBtnEl.removeClass('hide');
-     } else if ($(e.target).text() !== currentQ.answer){
+     } else if ($(e.target).text() !== currentQ.answer && $(e.target).hasClass('btn')){
         $(e.target).addClass('btn-danger');
         score -= 15;
         console.log(score);
@@ -105,13 +105,16 @@ function submitScore () {
     if (!user.value) {
         formEl.fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
     } else {
+        // Set user to localStorage
         userJSON.name = user.value
         userJSON.score = score
         localStorage.setItem("user", JSON.stringify(userJSON))
+        //hide and display appropriate elements
         formEl.addClass('hide');
         submitBtnEl.addClass('hide');
         startButtonEl.removeClass('hide');
         startButtonEl.text('Restart');
+        //NEED TO CREATE USER SCORE DISPLAY
     }
 
 };

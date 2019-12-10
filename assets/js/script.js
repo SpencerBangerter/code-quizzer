@@ -19,7 +19,10 @@ let questionIndex = 0;
 // sets question from question array based upon the index above
 let currentQ = questionsArr[questionIndex];
 let score = 300;
-
+let userJSON = {
+    name: '',
+    score: '',
+}
 /////////////////////
 // Click Listeners //
 /////////////////////
@@ -98,7 +101,11 @@ function submitScore () {
     if (!user.value) {
         formEl.fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
     } else {
-        
+        userJSON.name = user.value
+        userJSON.score = score
+        localStorage.setItem("user", JSON.stringify(userJSON))
+        console.log(userJSON)
+
     }
 
 };

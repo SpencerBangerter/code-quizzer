@@ -9,11 +9,11 @@ var questionsArr = [
       choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
       answer: "parentheses"
     },
-    {
-        title: "Which of these is a JS library?",
-        choices: ["ES9", "ES7", "ES6", "React", "CSS", "EMCA"],
-        answer: "React"
-    },
+    // {
+    //     title: "Which of these is a JS library?",
+    //     choices: ["ES9", "ES7", "ES6", "React", "CSS", "EMCA"],
+    //     answer: "React"
+    // },
   
   ];
   

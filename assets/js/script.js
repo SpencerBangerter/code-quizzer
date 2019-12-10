@@ -5,26 +5,28 @@
 // Element variables
 let startButtonEl = $("#start-btn");
 let qContainerEl = $('#question-container');
-let questionEl = $('#question')
-let aGridEl = $('#answer-buttons')
-let nextBtnEl = $('#next-btn')
-let answerBtnEl = $('#answer-buttons')
+let questionEl = $('#question');
+let aGridEl = $('#answer-buttons');
+let nextBtnEl = $('#next-btn');
+let answerBtnEl = $('#answer-buttons');
+let submitBtnEl = $('#submit-btn');
+let userEl = $('#user-form');
+// Base Variables
 // Question index to increment current question when needed
-let questionIndex = 0
+let questionIndex = 0;
 // sets question from question array based upon the index above
-let currentQ = questionsArr[questionIndex]
-let time = 300
+let currentQ = questionsArr[questionIndex];
+let score = 300;
+
 /////////////////////
 // Click Listeners //
 /////////////////////
 
-//When Start is clicked hide start and launch question 1.
+//when an button is selected run function
 startButtonEl.click(startQuiz);
-
-//when an answer is selected run function
 answerBtnEl.click(selectAnswer);
-
-nextBtnEl.click(nextQuestion)
+nextBtnEl.click(nextQuestion);
+submitBtnEl.click(submitScore);
 
 ///////////////
 // Functions //
@@ -36,8 +38,8 @@ function startQuiz() {
     startButtonEl.addClass('hide');
     qContainerEl.removeClass('hide');
     //calls display func with the current Question set above
-    dispQuestion(currentQ)
-}
+    dispQuestion(currentQ);
+};
 
 //Display the question of current index, and make buttons for each answer option. 
 //Allows for any number of answers on any question.
@@ -54,19 +56,8 @@ function dispQuestion(question) {
         newButton.addClass('btn');
         aGridEl.append(newButton);
     })
-}
+};
 
-function nextQuestion () {
-    questionIndex++
-    currentQ = questionsArr[questionIndex]
-    if (questionIndex === questionsArr.length){
-        alert('Last Q')
-        questionEl.empty();
-        aGridEl.empty();
-    } else {
-        dispQuestion(currentQ)
-    }
-}
 //Bug when clicking inbetween buttons TO FIX
 function selectAnswer(e) {
      if ($(e.target).text() === currentQ.answer) {
@@ -74,9 +65,32 @@ function selectAnswer(e) {
          nextBtnEl.removeClass('hide');
      } else if ($(e.target).text() !== currentQ.answer){
         $(e.target).addClass('btn-danger');
-        time -= 15
-        console.log(time)
+        score -= 15;
+        console.log(score);
      }
-}
+};
 
+function nextQuestion () {
+    //increment q index and run appropriate statement
+    questionIndex++
+    currentQ = questionsArr[questionIndex]
+    if (questionIndex === questionsArr.length){
+        //Stop Score countdown
+
+        //Empty container, show correct buttons/name input
+        qContainerEl.empty()
+        userEl.removeClass('hide');
+        submitBtnEl.removeClass('hide');
+        nextBtnEl.addClass('hide');
+
+    
+
+    } else {
+        dispQuestion(currentQ);
+    }
+};
+
+function submitScore () {
+    console.log("score Submit")
+};
 

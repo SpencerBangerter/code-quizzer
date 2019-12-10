@@ -67,6 +67,30 @@ body{
     font-size: 1.5rem;
     font-weight: bolder;
 }
+.submit-button {
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    margin-left: 10px;
+}
+.input-group-text, .form-control {
+    border: 1px solid black;
+    padding: 0px 10px;
+    font-family: 'Alata', sans-serif;
+    height: 57px;
+}
+    
+.input-group-text{
+    color: white;
+    background:#0074D9;
+}
+.form-control{
+    background: white;
+    color: black;
+}
+.form-control:hover{
+    background: lightgray;
+}
 .controls{
     display: flex;
     justify-content: center;

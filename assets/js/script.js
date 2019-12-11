@@ -17,6 +17,7 @@ let scoreBtnEl = $('#score-btn');
 let scoreEl = $('#score-container')
 let clearBtnEl = $('#clr-btn');
 let userDispEl = $('#user-display');
+let userHeadingEl = $('#user-heading');
 let timerDispEl = $('#timer');
 let timeEl = $('#time');
 
@@ -55,6 +56,8 @@ function startQuiz() {
     scoreBtnEl.addClass('hide');
     qContainerEl.removeClass('hide');
     scoreEl.addClass('hide');
+    userHeadingEl.addClass('hide');
+    userDispEl.addClass('hide');
     clearBtnEl.addClass('hide');
     timerDispEl.removeClass('hide');
     //calls display func with the current Question set above
@@ -139,6 +142,8 @@ function submitScore () {
         startButtonEl.text('Restart')
         scoreBtnEl.addClass('hide');
         scoreEl.removeClass('hide');
+        userDispEl.removeClass('hide');
+        userHeadingEl.removeClass('hide');
         clearBtnEl.removeClass('hide');
         timerDispEl.addClass('hide');
         //display the now newly sorted and spliced array with the dispUser functions
@@ -164,6 +169,7 @@ function displayUsers () {
     formEl.addClass('hide');
     submitBtnEl.addClass('hide');
     scoreEl.removeClass('hide');
+    userHeadingEl.removeClass('hide');
     clearBtnEl.removeClass('hide');
     
 }
@@ -173,6 +179,7 @@ function viewScores () {
     startButtonEl.text('Start Quiz')
     scoreBtnEl.addClass('hide');
     scoreEl.removeClass('hide');
+    userHeadingEl.removeClass('hide');
     clearBtnEl.removeClass('hide');
     displayUsers()
 }

@@ -17,14 +17,19 @@ let scoreBtnEl = $('#score-btn');
 let scoreEl = $('#score-container')
 let clearBtnEl = $('#clr-btn');
 let userDispEl = $('#user-display');
+let timerDispEl = $('#timer');
+let timeEl = $('#time');
+
 // Base Variables
 // Question index to increment current question when needed
 let questionIndex = 0;
 // sets question from question array based upon the index above
 let currentQ = questionsArr[questionIndex];
-let score = 0;
 //pulls user array or sets user array to blank array if null
 let usersArr = JSON.parse(localStorage.getItem("usersArr")) || [];
+//score vars
+let score = 0;
+
 /////////////////////
 // Click Listeners //
 /////////////////////
@@ -51,9 +56,13 @@ function startQuiz() {
     qContainerEl.removeClass('hide');
     scoreEl.addClass('hide');
     clearBtnEl.addClass('hide');
+    timerDispEl.removeClass('hide');
     //calls display func with the current Question set above
     dispQuestion(currentQ);
     score = 300
+    timeEl.text(score)
+    setInterval(scoreDown, 500)
+
 };
 
 //Display the question of current index, and make buttons for each answer option. 
@@ -79,9 +88,11 @@ function selectAnswer(e) {
          $(e.target).addClass('btn-success');
          nextBtnEl.removeClass('hide');
      } else if ($(e.target).text() !== currentQ.answer && $(e.target).hasClass('btn')){
+        //Alert user to wrong answer, flash score, and decrement score
         $(e.target).addClass('btn-danger');
         score -= 15;
-        console.log(score);
+        timeEl.text(score)
+        timeEl.fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
      }
 };
 
@@ -91,12 +102,13 @@ function nextQuestion () {
     currentQ = questionsArr[questionIndex]
     if (questionIndex === questionsArr.length){
         //Stop Score countdown
-
+        clearInterval(scoreDown)
         //Empty container, show correct buttons/name input
         qContainerEl.addClass('hide')
         formEl.removeClass('hide');
         submitBtnEl.removeClass('hide');
         nextBtnEl.addClass('hide');
+        timeEl.text(`Points: ${score}`)
     } else {
         dispQuestion(currentQ);
         nextBtnEl.addClass('hide');
@@ -127,6 +139,7 @@ function submitScore () {
         scoreBtnEl.addClass('hide');
         scoreEl.removeClass('hide');
         clearBtnEl.removeClass('hide');
+        timerDispEl.addClass('hide');
         //display the now newly sorted and spliced array with the dispUser functions
         displayUsers()
 
@@ -169,4 +182,9 @@ function clearScores () {
     localStorage.setItem('usersArr', '[]');
     console.log(usersArr)
 
+}
+
+function scoreDown () {
+    score--
+    timeEl.text(score)
 }

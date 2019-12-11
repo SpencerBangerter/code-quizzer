@@ -15,7 +15,8 @@ let userEl = $('#user');
 let controlsEl = $('#controls');
 let scoreBtnEl = $('#score-btn');
 let scoreEl = $('#score-container')
-let clearBtnEl =$('#clr-btn');
+let clearBtnEl = $('#clr-btn');
+let userDispEl = $('#user-display');
 // Base Variables
 // Question index to increment current question when needed
 let questionIndex = 0;
@@ -24,7 +25,6 @@ let currentQ = questionsArr[questionIndex];
 let score = 0;
 //pulls user array or sets user array to blank array if null
 let usersArr = JSON.parse(localStorage.getItem("usersArr")) || [];
-console.log(usersArr)
 /////////////////////
 // Click Listeners //
 /////////////////////
@@ -73,6 +73,7 @@ function dispQuestion(question) {
     })
 };
 
+//Determine if answer is correct when clicked
 function selectAnswer(e) {
      if ($(e.target).text() === currentQ.answer) {
          $(e.target).addClass('btn-success');
@@ -114,36 +115,60 @@ function submitScore () {
         let userJSON = {
             username: user.value,
             score: score
-        }
+        };
 
-        //adds user and score to user array, and sorts/cuts off under 3 top scores
+        //adds user and score to user array, and sorts/cuts off under 5 top scores
         usersArr.push(userJSON);
         usersArr.sort((a,b) => b.score - a.score );
-        usersArr.splice(3);
-        
+        usersArr.splice(5);
+
         //Set JSON usersArr to current Arr which has the new spliced array
         localStorage.setItem('usersArr', JSON.stringify(usersArr));
-        console.log(usersArr)
 
-        //hide and display appropriate elements
-        formEl.addClass('hide');
-        submitBtnEl.addClass('hide');
         startButtonEl.removeClass('hide');
-        startButtonEl.text('Restart');
+        startButtonEl.text('Restart')
+        scoreBtnEl.addClass('hide');
         scoreEl.removeClass('hide');
         clearBtnEl.removeClass('hide');
-    }
+        displayUsers()
+        console.log(usersArr)
+
+        }
 
 };
+//Create list items to the OL for each User in the top 5
+function displayUsers () {
+    //Empty the userDiplay so when you append new items it doesnt have duplicate displays FINALLY FIXED
+    userDispEl.empty();
+    usersArr.splice(5);
 
+    $.each(usersArr, function (index, options) {
+        //create button, set text, add button class, and append to end for each choice
+        let newItem = $('<li>');
+        newItem.text(`${options.username} - ${options.score}`);
+        userDispEl.append(newItem);
+    })
+
+    //hide and display appropriate elements
+    formEl.addClass('hide');
+    submitBtnEl.addClass('hide');
+    scoreEl.removeClass('hide');
+    clearBtnEl.removeClass('hide');
+    
+}
 function viewScores () {
     startButtonEl.removeClass('hide');
     startButtonEl.text('Start Quiz')
     scoreBtnEl.addClass('hide');
     scoreEl.removeClass('hide');
     clearBtnEl.removeClass('hide');
+    displayUsers()
 }
 
 function clearScores () {
+    userDispEl.empty();
+    usersArr = [];
+    localStorage.setItem('usersArr', '[]');
+    console.log(usersArr)
 
 }

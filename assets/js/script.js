@@ -15,17 +15,16 @@ let userEl = $('#user');
 let controlsEl = $('#controls');
 let scoreBtnEl = $('#score-btn');
 let scoreEl = $('#score-container')
+let clearBtnEl =$('#clr-btn');
 // Base Variables
 // Question index to increment current question when needed
 let questionIndex = 0;
 // sets question from question array based upon the index above
 let currentQ = questionsArr[questionIndex];
 let score = 0;
-let userJSON = {
-    name: '',
-    score: '',
-}
-
+//pulls user array or sets user array to blank array if null
+let usersArr = JSON.parse(localStorage.getItem("usersArr")) || [];
+console.log(usersArr)
 /////////////////////
 // Click Listeners //
 /////////////////////
@@ -36,6 +35,7 @@ answerBtnEl.click(selectAnswer);
 nextBtnEl.click(nextQuestion);
 submitBtnEl.click(submitScore);
 scoreBtnEl.click(viewScores);
+clearBtnEl.click(clearScores);
 
 ///////////////
 // Functions //
@@ -50,6 +50,7 @@ function startQuiz() {
     scoreBtnEl.addClass('hide');
     qContainerEl.removeClass('hide');
     scoreEl.addClass('hide');
+    clearBtnEl.addClass('hide');
     //calls display func with the current Question set above
     dispQuestion(currentQ);
     score = 300
@@ -109,17 +110,28 @@ function submitScore () {
     if (!user.value) {
         formEl.fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
     } else {
-        // Set user to localStorage
-        userJSON.name = user.value
-        userJSON.score = score
-        localStorage.setItem("user", JSON.stringify(userJSON))
+        // Set User/score, then push to user array, put into localStorage
+        let userJSON = {
+            username: user.value,
+            score: score
+        }
+
+        //adds user and score to user array, and sorts/cuts off under 3 top scores
+        usersArr.push(userJSON);
+        usersArr.sort((a,b) => b.score - a.score );
+        usersArr.splice(3);
+        
+        //Set JSON usersArr to current Arr which has the new spliced array
+        localStorage.setItem('usersArr', JSON.stringify(usersArr));
+        console.log(usersArr)
+
         //hide and display appropriate elements
         formEl.addClass('hide');
         submitBtnEl.addClass('hide');
         startButtonEl.removeClass('hide');
         startButtonEl.text('Restart');
-        //NEED TO CREATE USER SCORE DISPLAY
         scoreEl.removeClass('hide');
+        clearBtnEl.removeClass('hide');
     }
 
 };
@@ -129,4 +141,9 @@ function viewScores () {
     startButtonEl.text('Start Quiz')
     scoreBtnEl.addClass('hide');
     scoreEl.removeClass('hide');
+    clearBtnEl.removeClass('hide');
+}
+
+function clearScores () {
+
 }

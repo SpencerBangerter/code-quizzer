@@ -188,10 +188,16 @@ function clearScores () {
 function startTimer () {
     interval = setInterval(function () {
         score--
+        if (score < 0) {
+            score = 0;
+            stopTimer()
+        
+        }
         timeEl.text(`Time Left: ${score}`)
     }, 1000)
+    
 }
-
+    
 function stopTimer () {
     clearInterval(interval)
 }

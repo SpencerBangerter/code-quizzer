@@ -101,5 +101,8 @@ body{
 .timer-container{
     margin-top: 10px;
     text-align: center;
-    
+}
+.score-container{
+    display: grid;
+    gap: 10px;
 }

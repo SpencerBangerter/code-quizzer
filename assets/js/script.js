@@ -97,10 +97,6 @@ function nextQuestion () {
         formEl.removeClass('hide');
         submitBtnEl.removeClass('hide');
         nextBtnEl.addClass('hide');
-        controlsEl.addClass('grid');
-
-    
-
     } else {
         dispQuestion(currentQ);
         nextBtnEl.addClass('hide');
@@ -125,25 +121,26 @@ function submitScore () {
         //Set JSON usersArr to current Arr which has the new spliced array
         localStorage.setItem('usersArr', JSON.stringify(usersArr));
 
+        //hide/show correct elements
         startButtonEl.removeClass('hide');
         startButtonEl.text('Restart')
         scoreBtnEl.addClass('hide');
         scoreEl.removeClass('hide');
         clearBtnEl.removeClass('hide');
+        //display the now newly sorted and spliced array with the dispUser functions
         displayUsers()
-        console.log(usersArr)
 
         }
 
 };
+
 //Create list items to the OL for each User in the top 5
 function displayUsers () {
     //Empty the userDiplay so when you append new items it doesnt have duplicate displays FINALLY FIXED
     userDispEl.empty();
-    usersArr.splice(5);
 
     $.each(usersArr, function (index, options) {
-        //create button, set text, add button class, and append to end for each choice
+        //create list item, set text, and append to the OL.
         let newItem = $('<li>');
         newItem.text(`${options.username} - ${options.score}`);
         userDispEl.append(newItem);
@@ -156,6 +153,7 @@ function displayUsers () {
     clearBtnEl.removeClass('hide');
     
 }
+
 function viewScores () {
     startButtonEl.removeClass('hide');
     startButtonEl.text('Start Quiz')

@@ -16,6 +16,8 @@ Selecting the wrong answer to a qustion will turn the answer red, and decrement 
 You have 90 seconds to complete the test, and each second left counts for 1 point towards your score. Should your time left hit zero you can still finish the test, but any further incorrect answers will put your score into the negative! Make sure to retry if you end up with a negative score!
 
 Once you complete all the questions, you will be prompted to enter your name and submit your score. If your score is one of the top 5 scores (scores stored in local storage) you will be placed into the leaderboard. You may restart the test, or clear the highscores once you have finished the test.
+![Screenshot of Submission](https://github.com/SpencerBangerter/code-quizzer/blob/master/assets/screenshots/submit.png)
+
 ![Screenshot of High Scores](https://github.com/SpencerBangerter/code-quizzer/blob/master/assets/screenshots/highscores.png)
 
 ## Credits
